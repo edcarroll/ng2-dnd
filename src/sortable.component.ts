@@ -114,10 +114,12 @@ class SortableFormArrayHandler {
 
     removeItemAt(sortableData: any, index: number) {
         sortableData.removeAt(index);
+        sortableData.markAsDirty();
     }
 
     insertItemAt(sortableData: any, item: any, index: number) {
         sortableData.insert(index, item);
+        sortableData.markAsDirty();
     }
 }
 
