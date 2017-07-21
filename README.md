@@ -678,9 +678,9 @@ class Widget {
 }
 ```
 
-# Retreiving files in a drop zone
+#### 13. Retreiving files in a drop zone
 
-Sinze it is possible to drag and drop one or more files to a drop zone, you need to handle the incomming files.
+Since it is possible to drag and drop one or more files to a drop zone, you need to handle the incomming files.
 
 ```js
 import {Component} from '@angular/core';
@@ -760,6 +760,50 @@ export class AppComponent {
       }
     }
   }
+```
+
+#### 15. Simple FormArray sortable with Drag-and-Drop
+Here is an example of simple sortable of favorite drinks moving in container via drag and drop operation but using FormArray instead of Array:
+
+```js
+import {Component} from '@angular/core';
+import {FormArray, FormControl} from '@angular/forms';
+
+@Component({
+    selector: 'simple-formarray-sortable',
+    template: `
+<h4>Simple FormArray sortable</h4>
+<div class="row">
+    <div class="col-sm-3">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                Favorite drinks
+            </div>
+            <div class="panel-body">
+                <ul class="list-group" dnd-sortable-container [sortableData]="listOne">
+                    <li *ngFor="let item of listOne.controls; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i"><input type="text" [formControl]="item"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                My prefences:<br/>
+                <span *ngFor="let item of listOne.controls; let i = index">{{i + 1}}) {{item.value}}<br/></span>
+            </div>
+        </div>
+    </div>
+</div>`
+})
+export class SimpleFormArraySortableComponent {
+    listOne: FormArray = new FormArray([
+      new FormControl('Coffee'),
+      new FormControl('Orange Juice'),
+      new FormControl('Red Wine'),
+      new FormControl('Unhealty drink!'),
+      new FormControl('Water')
+    ]);
 }
 ```
 
@@ -768,6 +812,7 @@ export class AppComponent {
 - [Valerii Kuznetsov](https://github.com/solival)
 - [Shane Oborn](https://github.com/obosha)
 - [Juergen Gutsch](https://github.com/JuergenGutsch)
+- [Damjan Cilenšek](https://github.com/loudandwicked)
 
 # License
  [MIT](/LICENSE)
